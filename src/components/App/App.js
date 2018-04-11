@@ -36,18 +36,16 @@ class App extends Component {
     if (state.step === 1) {
       if (state.firstName !== '' && state.lastName !== '' && state.email !== '' && state.email.includes('@')) {
         return true;
+      } else if (state.firstName === '' && state.lastName !== '' && state.email !== '' && state.email.includes('@')) {
+        return false;
       } else if (state.firstName !== '' && state.lastName === '' && state.email !== '' && state.email.includes('@')) {
         return false;
       } else if (state.firstName !== '' && state.lastName !== '' && state.email === '' && state.email.includes('@')) {
         return false;
       }
     } else if (state.step === 2) {
-      if (state.cardNumber.length === 16) {
-        return true;
-      }
-    } else if (state.step !== 1 | 2) {
-      return false;
-    }
+      (state.cardNumber.length === 16) ? true : false
+    } else if (state.step !== 1 | 2) { return false }
   }
 
   renderForm = () => {
@@ -63,10 +61,22 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <div className="tab-panel"></div>
-        <div className="form-content">{this.renderForm()}</div>
+        <div className="tab-panel">
+          <Step number={1}>Personal information</Step>
+          <Step number={2}>Card information</Step>
+          <Step number={3}>Finish</Step>
+        </div>
+        <div className="form-content">
+          <div className="" data-test="personal-form">
+            <Title step={this.state.step} />
+            {this.renderForm()}
+          </div>
+        </div>
         <div className="button-panel">
-          <button className="button-next" onClick={this.handleClickNextForm} disable="true"></button>
+          <button className="button-next"
+            onClick={this.handleClickNextForm}
+            disabled={this.isFormCommitable}>Next
+          </button>
         </div>
       </div>
     );

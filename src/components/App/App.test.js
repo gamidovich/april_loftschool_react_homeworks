@@ -69,17 +69,17 @@ describe('Компонент App', () => {
       });
     });
 
-    // describe('handleChangeForm', () => {
-    //   const wrapper = shallow(<App />);
-    //   it('Присутствует', () => {
-    //     expect(wrapper.instance().handleChangeForm).toBeDefined();
-    //   });
-    //   it('При вызове с 2 аргументами меняется state[первый аргумент] = второй аргумент', () => {
-    //     wrapper.instance().handleChangeForm('firstName', 'Иван');
-    //     wrapper.update();
-    //     expect(wrapper.state().firstName).toEqual('Иван');
-    //   });
-    // });
+    describe('handleChangeForm', () => {
+      const wrapper = shallow(<App />);
+      it('Присутствует', () => {
+        expect(wrapper.instance().handleChangeForm).toBeDefined();
+      });
+      it('При вызове с 2 аргументами меняется state[первый аргумент] = второй аргумент', () => {
+        wrapper.instance().handleChangeForm('firstName', 'Иван');
+        wrapper.update();
+        expect(wrapper.state().firstName).toEqual('Иван');
+      });
+    });
 
     describe('handleClickNextForm', () => {
       const wrapper = shallow(<App />);
@@ -165,40 +165,40 @@ describe('Компонент App', () => {
         expect(wrapper.instance().renderForm).toBeDefined();
       });
 
-      // it(`Если state.step === 1 возвращает компонент <PersonalForm firstName={state.firstName} lastName={state.lastName} email={state.email onChangeForm={App.handleChangeForm} />`, () => {
-      //   wrapper.setState({
-      //     step: 1,
-      //     firstName: 'test',
-      //     lastName: 'test',
-      //     email: 'test@',
-      //   });
-      //   expect(wrapper.instance().renderForm().props).toEqual({
-      //     firstName: 'test',
-      //     lastName: 'test',
-      //     email: 'test@',
-      //     onChangeForm: wrapper.instance().handleChangeForm,
-      //   });
-      // });
-      // it(`Если state.step === 2 возвращает компонент <CardForm cardNumber={state.cardNumber} onChangeForm={this.handleChangeForm} onChangeTimeOver={this.handleChangeTimeOver} />`, () => {
-      //   wrapper.setState({
-      //     step: 2,
-      //     cardNumber: '1234',
-      //   });
-      //   expect(wrapper.instance().renderForm().props).toEqual({
-      //     cardNumber: '1234',
-      //     onChangeForm: wrapper.instance().handleChangeForm,
-      //     onChangeTimeOver: wrapper.instance().handleChangeTimeOver,
-      //   });
-      // });
-      // it(`Если state.step === 3 возвращает строку 'Поздравляем!'`, () => {
-      //   const wrapper = shallow(<App />);
-      //   wrapper.setState({
-      //     step: 3,
-      //   });
-      //   expect(wrapper.instance().renderForm()).toEqual(
-      //     <p data-test="congratulations">Поздравляем!</p>,
-      //   );
-      // });
+      it(`Если state.step === 1 возвращает компонент <PersonalForm firstName={state.firstName} lastName={state.lastName} email={state.email} onChangeForm={App.handleChangeForm} />`, () => {
+        wrapper.setState({
+          step: 1,
+          firstName: 'test',
+          lastName: 'test',
+          email: 'test@',
+        });
+        expect(wrapper.instance().renderForm().props).toEqual({
+          firstName: 'test',
+          lastName: 'test',
+          email: 'test@',
+          onChangeForm: wrapper.instance().handleChangeForm,
+        });
+      });
+      it(`Если state.step === 2 возвращает компонент <CardForm cardNumber={state.cardNumber} onChangeForm={this.handleChangeForm} onChangeTimeOver={this.handleChangeTimeOver} />`, () => {
+        wrapper.setState({
+          step: 2,
+          cardNumber: '1234',
+        });
+        expect(wrapper.instance().renderForm().props).toEqual({
+          cardNumber: '1234',
+          onChangeForm: wrapper.instance().handleChangeForm,
+          onChangeTimeOver: wrapper.instance().handleChangeTimeOver,
+        });
+      });
+      it(`Если state.step === 3 возвращает строку 'Поздравляем!'`, () => {
+        const wrapper = shallow(<App />);
+        wrapper.setState({
+          step: 3,
+        });
+        expect(wrapper.instance().renderForm()).toEqual(
+          <p data-test="congratulations">Поздравляем!</p>,
+        );
+      });
     });
   });
 });

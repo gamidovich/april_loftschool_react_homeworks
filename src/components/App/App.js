@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import CardForm from '../CardForm';
 import PersonalForm from '../PersonalForm';
+import Step from '../Step';
+import Title from '../Title';
 import './App.css';
 
 class App extends Component {
@@ -48,13 +50,21 @@ class App extends Component {
     }
   }
 
-  renderForm = () => { };
+  renderForm = () => {
+    if (this.state.step === 1) {
+      return <PersonalForm firstName={this.state.firstName} lastName={this.state.lastName} email={this.state.email} onChangeForm={this.handleChangeForm} />
+    } else if (this.state.step === 2) {
+      return <CardForm cardNumber={this.state.cardNumber} onChangeForm={this.handleChangeForm} onChangeTimeOver={this.handleChangeTimeOver} />
+    } else if (this.state.step === 3) {
+      return <p data-test="congratulations">Поздравляем!</p>;
+    }
+  };
 
   render() {
     return (
       <div className="container">
         <div className="tab-panel"></div>
-        <div className="form-content"><CardForm /></div>
+        <div className="form-content">{this.renderForm()}</div>
         <div className="button-panel">
           <button className="button-next" onClick={this.handleClickNextForm} disable="true"></button>
         </div>

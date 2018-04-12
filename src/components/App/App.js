@@ -35,17 +35,21 @@ class App extends Component {
     const state = this.state;
     if (state.step === 1) {
       if (state.firstName !== '' && state.lastName !== '' && state.email !== '' && state.email.includes('@')) {
+        return false;
+      } else if (state.firstName === '' || state.lastName !== '' || state.email !== '' || !state.email.includes('@')) {
         return true;
-      } else if (state.firstName === '' && state.lastName !== '' && state.email !== '' && state.email.includes('@')) {
-        return false;
-      } else if (state.firstName !== '' && state.lastName === '' && state.email !== '' && state.email.includes('@')) {
-        return false;
-      } else if (state.firstName !== '' && state.lastName !== '' && state.email === '' && state.email.includes('@')) {
-        return false;
+      } else if (state.firstName !== '' || state.lastName === '' || state.email !== '' || !state.email.includes('@')) {
+        return true;
+      } else if (state.firstName !== '' || state.lastName !== '' || state.email === '' || !state.email.includes('@')) {
+        return true;
       }
     } else if (state.step === 2) {
-      (state.cardNumber.length === 16) ? true : false
-    } else if (state.step !== 1 | 2) { return false }
+      if (state.cardNumber.length !== 16) {
+        return true
+      } else if (state.cardNumber.length === 16) {
+        return false
+      }
+    } else if (state.step !== 1 | 2) { return true }
   }
 
   renderForm = () => {
@@ -59,6 +63,8 @@ class App extends Component {
   };
 
   render() {
+    let isDisabled = this.isFormCommitable();
+    console.log(this.state);
     return (
       <div className="container">
         <div className="tab-panel">
@@ -74,9 +80,10 @@ class App extends Component {
         </div>
         <div className="button-panel">
           <button className="button-next"
+            type="button"
             onClick={this.handleClickNextForm}
-            disabled={this.isFormCommitable}>Next
-          </button>
+            disabled={isDisabled}>Next
+        </button>
         </div>
       </div>
     );

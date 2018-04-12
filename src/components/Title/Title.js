@@ -9,7 +9,7 @@ class Title extends Component {
     } else if (this.props.step === 2) {
       return "Информация о карте"
     } else if (this.props.step === 3) {
-      return "Поздравляем";
+      return "";
     }
   };
 

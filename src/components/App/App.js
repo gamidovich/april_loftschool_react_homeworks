@@ -33,16 +33,17 @@ export default class App extends React.Component {
     }
 
     renderForm = () => {
-        if(this.state.step === 1){
+        const {cardNumber, firstName, lastName, email, step} = this.state
+        if(step === 1){
             return (
-                <PersonalForm props={this.state} onChangeForm = {this.handleChangeForm}/>
+                <PersonalForm data-test="personal-form" firstName={firstName} lastName={lastName} email={email} onChangeForm = {this.handleChangeForm}/>
             );
         }
-        else if(this.state.step === 2){
-            return <CardForm cardNumber={this.state.cardNumber} onChangeForm={this.handleChangeForm}/>
+        else if(step === 2){
+            return <CardForm cardNumber={cardNumber} onChangeForm={this.handleChangeForm}/>
         }
-        else if (this.state.step === 3){
-            return <p>Поздравляем!</p>
+        else if (step === 3){
+            return <p data-test="congratulations">Поздравляем!</p>
         }
     }
 
@@ -50,12 +51,23 @@ export default class App extends React.Component {
         return (
             <div className='container'>
                 <div className='tab-panel'>
-                    <Step number={1} children={'Personal information'} isSelected={this.state.step === 1 ? true : false} isClickable={this.state.step !== 1  ? true : false} onClick={this.handleTabClick}/>
-                    <Step number={2} children={'Card information'} isSelected={this.state.step === 2 ? true : false} isClickable={this.state.step !== 2 && this.state.step !== 1 ? true : false} onClick={this.handleTabClick}/>
-                    <Step number={3} children={'Finish!'} isSelected={this.state.step === 3 ? true : false} isClickable={this.state.step !== 3 && this.state.step !== 1 && this.state.step !== 3 && this.state.step !== 2? true : false} onClick={this.handleTabClick}/>
+                    <Step number={1} children={'Personal information'}
+                        isSelected={this.state.step === 1 ? true : false} 
+                        isClickable={this.state.step !== 1  ? true : false}
+                        onClick={this.handleTabClick}/>
+                    <Step number={2} children={'Card information'}
+                        isSelected={this.state.step === 2 ? true : false}
+                        isClickable={this.state.step !== 2 && this.state.step !== 1 ? true : false}
+                        onClick={this.handleTabClick}/>
+                    <Step number={3} children={'Finish!'}
+                        isSelected={this.state.step === 3 ? true : false}
+                        isClickable={this.state.step !== 3 && this.state.step !== 1 && this.state.step !== 3 && this.state.step !== 2 ? true : false}
+                        onClick={this.handleTabClick}/>
                 </div>
                 <div className='form-content'>
-                    {this.renderForm()}
+                    <form className='title'>
+                        {this.renderForm()}
+                    </form>
                 </div>
                 <div className='button-panel'>
                     <button disabled={!this.isFormCommitable()} className='button-next' onClick={this.handleClickNextForm}>Далее</button>

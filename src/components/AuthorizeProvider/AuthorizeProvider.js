@@ -59,7 +59,15 @@ const LoginPage = () => (
 			isAuthorized? (
 				<Redirect to="/private" />
 			): (
-				<button onClick={ authorizeUser }>authorizeUser</button>
+				<div classname="form-group">
+					<input type="text" placeholder="Логин" />
+					<input type="text" placeholder="Пароль" />
+
+					<button className="button-auth"
+					        onClick={ authorizeUser }
+					> Авторизироваться
+					</button>
+				</div>
 			)
 		}
 	</Consumer>

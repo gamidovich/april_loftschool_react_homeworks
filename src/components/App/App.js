@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import Switcher from '../Switcher';
 import './App.css';
 
+
+// import VideoPlayer from '../VideoPlayer';
+// import ModalButton from '../ModalButton';
+// import CardNumberHolder from '../CardNumberHolder';
+
 class App extends Component {
 
   state = { selectedChild: 0 };
@@ -22,7 +27,8 @@ class App extends Component {
           </ul >
         </nav >
         <hr></hr>
-        <Switcher value={this.state.selectedChild} />
+        <Switcher value={this.state.selectedChild}>
+        </Switcher>
       </div >
 
     );

@@ -4,7 +4,7 @@ import CardNumberInput from './CardNumberInput';
 class CardNumberHolder extends Component {
 
   state = {
-    creditCardInput: '' // можно использовать значения из пропсов this.props.onChange
+    creditCardInput: ''
   };
 
   onCardInput = (event) => { // запсиатьв пропсы инпута введенные значения

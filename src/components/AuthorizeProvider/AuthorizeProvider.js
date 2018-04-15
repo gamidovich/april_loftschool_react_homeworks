@@ -1,21 +1,94 @@
 import React, { Component } from 'react';
+import {
+    Route,
+    Link,
+    Redirect,
+    Switch,
+} from 'react-router-dom';
+
+import './AuthorizeProvider.css';
 
 const { Provider, Consumer } = React.createContext({ isAuthorized: false });
 
-
-// к сожалению тест раннер еще не готов к тестам с новым контекстом
-// по этому тут так много кода, изучайте как следует!
-// немного кода я все таки вырезал ^^
 class AuthorizeProvider extends Component {
-  render() {
-    const { children } = this.props;
-    const { isAuthorized } = this.state;
 
-    return (
-      <Provider value={{ isAuthorized, authorizeUser: this.authorizeUser }}>{children}</Provider>
-    );
-  }
+    state = {
+        isAuthorized: false,
+    };
+
+	authorizeUser = () => {
+		this.setState( ({ isAuthorized }) => ({ isAuthorized: true}));
+    };
+
+	render() {
+		const {children} = this.props;
+		const {isAuthorized} = this.state;
+
+		return (
+            <Provider
+	            value={{ isAuthorized, authorizeUser: this.authorizeUser }}
+            >
+                <Link to="/public" className="link">Public</Link>{''}
+                <Link to="/private" className="link">Private</Link>{''}
+                <Link to="/login" className="link">Login</Link>
+
+                <hr />
+
+                <Switch>
+                    <Route
+                        path="/public"
+                        render = {()=> <h1>Public</h1>}
+                    />
+	                <Route
+		                path="/login"
+		                component = { LoginPage }
+	                />
+	                <PrivateRoute
+		                path="/private"
+	                    component = { ()=>  <h1>Private</h1>}
+	                />
+                </Switch>
+            </Provider>
+		);
+	}
 }
+
+const LoginPage = () => (
+	<Consumer>
+		{({ isAuthorized, authorizeUser }) =>
+			isAuthorized? (
+				<Redirect to="/private" />
+			): (
+				<button onClick={ authorizeUser }>authorizeUser</button>
+			)
+		}
+	</Consumer>
+);
+
+const PrivateRoute = ({
+	component: Component,
+	...rest
+}) => (
+	<Consumer>
+		{({ isAuthorized }) => (
+			<Route
+				{...rest }
+				render = {props =>
+					isAuthorized? (
+						<Component {...props} />
+					): (
+						<Redirect
+							to={{
+								pathname: '/login',
+								state: { from: props.location},
+							}}
+						/>
+					)
+				}
+			/>
+		)}
+	</Consumer>
+);
 
 const AuthHOC = WrappedComponent =>
   class extends Component {

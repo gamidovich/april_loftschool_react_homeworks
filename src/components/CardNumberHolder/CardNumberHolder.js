@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import CardNumberInput from './CardNumberInput';
 
 class CardNumberHolder extends Component {
   static displayName = 'Card number formating'
@@ -6,11 +7,13 @@ class CardNumberHolder extends Component {
   state = {
     cardNumber: ''
   }
-
+  handleChange = (value) => {
+    this.setState({cardNumber: value})
+  }
   render() {
-    const {handleChange} = this.props
+    
     return (
-      <input className='CardNumberInput' onChange={handleChange}/>
+      <CardNumberInput cardNumber={this.state.cardNumber} onChange={this.handleChange}/>
     );
   }
 }

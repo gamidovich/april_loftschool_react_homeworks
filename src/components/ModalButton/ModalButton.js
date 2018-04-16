@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './ModalButton.css';
 import Modal from './Modal'
 
@@ -13,9 +13,15 @@ class ModalButton extends Component {
   showModal = () => this.setState({ isModalShow: true })
   render() {
     const {isModalShow} = this.state
-    if(isModalShow){
-      return <Modal />
-    }
+    return (
+      <Fragment>
+      <button onClick={this.showModal}>кнопка</button>
+      <Modal show={isModalShow}>
+        <h1>Модалочка</h1>
+        <button onClick={this.hideModal}>закрыть</button>
+      </Modal>
+      </Fragment>
+    );
   }
 }
 

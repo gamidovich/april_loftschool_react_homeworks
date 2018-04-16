@@ -3,10 +3,24 @@ import videoFile from './Video.mp4';
 import './VideoPlayer.css';
 
 class VideoPlayer extends PureComponent {
-  static displayName = 'Video player'
+  static displayName = 'Video player';
 
+  playerPlay() {
+    this.HTMLVideoElement.play();
+  }
+  playerStop() {
+    this.HTMLVideoElement.pause();
+  }
   render() {
-    return <h1>eeeee boy</h1>;
+    return (
+      <div className="video-player">
+        <video ref={video => (this.HTMLVideoElement = video)} className="video-player__source">
+          <source src={videoFile} type="video/mp4" />
+        </video>
+        <button onClick={this.playerPlay.bind(this)}>Play</button>
+        <button onClick={this.playerStop.bind(this)}>Stop</button>
+      </div>
+    );
   }
 }
 

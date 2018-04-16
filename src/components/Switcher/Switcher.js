@@ -25,11 +25,11 @@ class Switcher extends Component {
             data-id={id}
             onClick={this.handleChangeChild}
             >
-            {child.type.displayName}
+            {child.type.displayName||child.type.name}
             </li>)
           })}
         </ul>
-        <div>
+        <div className='component-wrapper'>
           {children[selectedChild]}
         </div>
       </nav>

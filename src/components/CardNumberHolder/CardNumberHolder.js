@@ -4,19 +4,21 @@ import CardNumberInput from './CardNumberInput';
 class CardNumberHolder extends Component {
 
   state = {
-    creditCardInput: ''
+    cardNumber: ''
   };
 
-  onCardInput = (event) => { // запсиатьв пропсы инпута введенные значения
+  static displayName = 'CardNumberHolder';
+
+  handleChange = (event) => { // запсиатьв пропсы инпута введенные значения
     const ev = event.target.value;
-    this.setState(creditCardInput => ({ creditCardInput: ev }));
+    this.setState(creditCardInput => ({ cardNumber: ev }));
   }
 
   render() {
     return (
       <CardNumberInput
-        cardNumber={this.state.creditCardInput}
-        onChange={this.onCardInput}
+        cardNumber={this.state.cardNumber}
+        onChange={this.handleChange}
       />
     );
   }

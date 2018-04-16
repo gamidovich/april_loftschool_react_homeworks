@@ -12,6 +12,8 @@ class VideoPlayer extends PureComponent { // не будет перередер�
     this.child.pause();
   }
 
+  static displayName = 'VideoPlayer';
+
   render() {
     return (
       <div className="video-player">

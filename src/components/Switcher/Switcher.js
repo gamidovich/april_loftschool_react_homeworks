@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import VideoPlayer from '../VideoPlayer';
-import ModalButton from '../ModalButton';
-import CardNumberHolder from '../CardNumberHolder';
 import './Switcher.css';
 
 // Для работы этой компоненты нужно использовать методы React.Children.toArray
@@ -10,30 +7,40 @@ import './Switcher.css';
 
 class Switcher extends Component {
 
-  /**
-   * Первый компонент рендреритмя, остальные нет. Хотя состояние и props.value приходят правильные.
-   * Не срабатывает условие.
-   */
-  render() {
-    let componentBlock = null;
-    console.log(this.props.value);
-    if (this.props.value === 0) { componentBlock = <VideoPlayer /> }
-    else if (this.props.value === 1) { componentBlock = <ModalButton /> }
-    else if (this.props.value === 2) { componentBlock = <CardNumberHolder /> }
-    return (<div className="component-wrapper">{componentBlock}</div>);
+  state = { selectedChild: 0 };
+
+  handleChangeChild = (event) => {
+    let dataProp = event.target.getAttribute('data-id');
+    this.setState({ selectedChild: dataProp });
   }
 
-  /**
-   * С использованием  React.Children.toArra и Arrya.slice - также ничего не выходит
-   */
-  // render() {
-  //   const children = React.Children.toArray(this.props.children);
-  //   console.log(this.props.value);
-  //   if (this.props.value === 0) { return children.slice(0, 1) }
-  //   else if (this.props.value === 1) { return children.slice(1, 2) }
-  //   else if (this.props.value === 2) { return children.slice(-1) }
-  // }
+  // https://mxstbr.blog/2017/02/react-children-deepdive/
+  // http://developingthoughts.co.uk/using-the-react-children-api/
+
+  render() {
+    const { children } = this.props;
+    // const state = this.state;
+    const chidrensArr = React.Children.toArray(children);
+    return (
+      <div className="switcher">
+        <nav>
+          <ul className="component-list">
+            {React.Children.map(children, (child, idx) => {
+              return (
+                <li
+                  className="component-list__name"
+                  data-id="idx"
+                  onClick={this.handleChangeChild}
+                >{(this.props.children.displayName) ? this.props.children.displayName : this.props.children.name}
+                </li>
+              );
+            })}
+          </ul >
+        </nav >
+        <hr></hr>
+      </div>
+    );
+  }
 }
 
 export default Switcher;
-

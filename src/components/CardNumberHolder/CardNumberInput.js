@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class CardNumberInput extends Component {
 
   state = {
-    // creditCardInput: this.props.cardNumber
     formatedInput: this.props.cardNumber
   }
 

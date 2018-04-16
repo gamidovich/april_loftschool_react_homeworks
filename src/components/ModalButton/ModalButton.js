@@ -4,33 +4,34 @@ import './ModalButton.css';
 class ModalButton extends Component {
 
   state = {
-    isShowModal: false,
+    isModalShow: false,
   };
 
+  static displayName = 'ModalButton';
 
-  closeModal = () => {
+  hideModal = () => {
     this.setState(state => ({
-      isShowModal: false,
+      isModalShow: false,
     }));
   };
 
   showModal = () => {
     this.setState(state => ({
-      isShowModal: true,
+      isModalShow: true,
     }));
   };
 
   render() {
-    const { isShowModal } = this.state;
+    const { isModalShow } = this.state;
     return (
       <Fragment>
         <button onClick={this.showModal}> Show modal!</button>
-        <Modal show={isShowModal}>
+        <Modal show={isModalShow}>
           <div className="modal">
             <div className="modal__fog">
               <div className="modal__body">
                 <h1>Модальное окно!</h1>
-                <button onClick={this.closeModal}>Close me</button>
+                <button onClick={this.hideModal}>Close me</button>
               </div>
             </div>
           </div>

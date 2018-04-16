@@ -11,9 +11,11 @@ export class App extends PureComponent {
   render() {
     return (
       <AuthorizeProvider>
-          <Link to="/" className="link">Public</Link>{''}
-          <Link to="/private" className="link">Private</Link>{''}
-          <Link to="/login" className="link">Login</Link>
+          <nav>
+              <Link to="/" className="link">Главная</Link>{''}
+              <Link to="/private" className="link">Секретная страница</Link>{''}
+              <Link to="/login" className="link">Войти</Link>
+          </nav>
         <hr />
         <div>
             <Switch>

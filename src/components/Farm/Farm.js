@@ -1,10 +1,37 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { moveOrderToCustomer } from 'actions/farmActions';
+import FarmForm from './FarmForm';
+import { moveLastOrder } from 'helpers'
 import './Farm.css';
 
 export class Farm extends Component {
+  static defaultProps = {
+    orders: [],
+  };
+
+  static propTypes = {
+    orders: PropTypes.array.isRequired,
+  };
+
+  handleMoveOrder = () => {
+    const { moveOrderToCustomer, orders } = this.props;
+
+    moveLastOrder(orders)(moveOrderToCustomer);
+  };
+
   render() {
-    return <div className="farm" />;
+    const { orders } = this.props;
+
+    return <FarmForm orders={orders} handleMove={this.handleMoveOrder}/>
   }
 }
 
-export default Farm;
+const mapStateToProps = ({ farm }) => ({ ...farm });
+
+const mapDispatchToProps = {
+  moveOrderToCustomer,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Farm);

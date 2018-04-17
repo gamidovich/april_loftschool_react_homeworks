@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import { createOrder, moveOrderToFarm } from 'actions/marketActions';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import MarketForm from './MarketForm';
+import { moveLastOrder } from 'helpers';
 import './Market.css';
 
 let id = 0;
@@ -33,9 +38,43 @@ const getNewOrder = () => {
 };
 
 export class Market extends Component {
+  static defaultProps = {
+    orders: [],
+  };
+
+  static propTypes = {
+    orders: PropTypes.array.isRequired,
+  };
+
+  handleCreateOrder = () => {
+    const { createOrder } = this.props;
+    const newOrder = getNewOrder();
+
+    createOrder(newOrder);
+  };
+
+  handleMoveOrder = () => {
+    const { moveOrderToFarm, orders } = this.props;
+
+    moveLastOrder(orders)(moveOrderToFarm);
+  };
+
   render() {
-    return <div className="market" />;
+    const { orders } = this.props;
+
+    return (
+      <MarketForm
+        {...{ orders, handleCreate: this.handleCreateOrder, handleMove: this.handleMoveOrder }}
+      />
+    );
   }
 }
 
-export default Market;
+const mapDispathToProps = {
+  createOrder,
+  moveOrderToFarm,
+};
+
+const mapStateToProps = ({ market }) => ({ ...market });
+
+export default connect(mapStateToProps, mapDispathToProps)(Market);

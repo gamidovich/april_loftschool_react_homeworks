@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import VideoPlayer from '../VideoPlayer';
 import CardNumberHolder from '../CardNumberHolder';
@@ -21,8 +22,29 @@ class App extends Component {
           <CardNumberHolder />
         </div>
       </div>
+=======
+import React, { PureComponent } from 'react';
+import { Switch, withRouter } from 'react-router-dom';
+import { AuthorizeProvider } from 'components/AuthorizeProvider';
+
+export class App extends PureComponent {
+  render() {
+    return (
+      <AuthorizeProvider>
+        <div>
+          <Switch />
+        </div>
+      </AuthorizeProvider>
+>>>>>>> ee9154f469f88197cfa8ca9daceaa7860685ba7e
     );
   }
 }
 
+<<<<<<< HEAD
 export default App;
+=======
+// это важно!
+// необходимо использовать этот хок(withRouter), потому что при использовании нескольких контекстов
+// реакт-роутер теряет свой контекст. Причина — использование старого апи.
+export default withRouter(App);
+>>>>>>> ee9154f469f88197cfa8ca9daceaa7860685ba7e

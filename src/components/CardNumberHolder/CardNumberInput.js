@@ -2,30 +2,21 @@ import React, { Component } from 'react';
 
 class CardNumberInput extends Component {
 
-  state = {
-    formatedInput: this.props.cardNumber
-  }
+  format = (input) => { input.replace(/(\d{0,4})/g, '$1 ') };
 
-  static defaultProps = {};
+  normalize = (input) => { input.trim() };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps); // то что задали в props компоненты
-    console.log(prevState); // то что задавалось в объекте state
-    // console.log('getDerivedStateFromProps');
-    return {
-      formatedInput: nextProps.cardNumber // меняем props компоненты для отформатированного вида
-        .replace(/(\d{0,4})/g, '$1 ')
-        .trim(),
-    };
-    // return null;
+  componentWillReceiveProps = (nextProps) => {
+    console.log(nextProps);
+    this.setState({ cardNumber: this.format(nextProps.cardNumber) });
   }
 
   render() {
-    // console.log(this.state);
+    console.log(this.state);
     return (
       <input type="text"
         onChange={this.props.onChange}
-        value={this.state.formatedInput}
+      // value={this.state.cardNumber}
       />
     );
   }

@@ -1,43 +1,52 @@
 import React, { Component } from 'react';
 import './Switcher.css';
 
-// Для работы этой компоненты нужно использовать методы React.Children.toArray
-// а так же работать с child.type.name и child.type.displayName
-
+import VideoPlayer from '../VideoPlayer';
+import ModalButton from '../ModalButton';
+import CardNumberHolder from '../CardNumberHolder';
 
 class Switcher extends Component {
 
   state = { selectedChild: 0 };
 
   handleChangeChild = (event) => {
-    let dataProp = event.target.getAttribute('data-id');
-    this.setState({ selectedChild: dataProp });
+    let index = event.target.attributes.getNamedItem("data-id").value;
+    this.setState({ selectedChild: index });
   }
 
-  // https://mxstbr.blog/2017/02/react-children-deepdive/
-  // http://developingthoughts.co.uk/using-the-react-children-api/
+  getChildComponent = () => {
+    const state = this.state;
+    let childComponent = null;
+    if (state.selectedChild === 0) {
+      childComponent = <VideoPlayer />
+    } else if (state.selectedChild === 1) {
+      childComponent = <ModalButton />
+    } else if (state.selectedChild === 1) {
+      childComponent = <CardNumberHolder />
+    }
+    return childComponent;
+  }
 
   render() {
-    const { children } = this.props;
-    // const state = this.state;
-    const chidrensArr = React.Children.toArray(children);
+    // console.log(this.state.selectedChild);
+    const childrensArr = React.Children.toArray(this.props.children);
     return (
       <div className="switcher">
         <nav>
           <ul className="component-list">
-            {React.Children.map(children, (child, idx) => {
-              return (
-                <li
-                  className="component-list__name"
-                  data-id="idx"
-                  onClick={this.handleChangeChild}
-                >{(this.props.children.displayName) ? this.props.children.displayName : this.props.children.name}
-                </li>
-              );
+            {childrensArr.map((el, i) => {
+              return <li
+                className="component-list__name"
+                data-id={i}
+                key={i}
+                onClick={this.handleChangeChild}
+              >{(el.type.displayName) ? el.type.displayName : el.type.name}
+              </li>
             })}
           </ul >
         </nav >
         <hr></hr>
+        <div className="component-wrapper">{this.getChildComponent()}</div>
       </div>
     );
   }

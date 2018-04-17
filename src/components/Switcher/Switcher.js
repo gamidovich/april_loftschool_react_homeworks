@@ -19,7 +19,7 @@ class Switcher extends Component {
     return (
       <nav>
         <ul className='component-list'>
-          {children.map((child, id) => {
+          {React.Children.map(children, (child, id) => {
             return (<li className='component-list__name'
             key={id}
             data-id={id}

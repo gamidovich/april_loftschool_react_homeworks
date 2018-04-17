@@ -18,6 +18,7 @@ class Login extends Component {
       const { authorizeUser } = this.props;
       if (authorizeUser(email, password)) {
 	      this.setState( ({ errors }) => ({ errors: ''}));
+	      this.props.history.push('/');
       } else {
 	      this.setState( ({ errors }) => ({ errors: 'Проверьте введённые данные'}));
       }
@@ -47,7 +48,7 @@ class Login extends Component {
 	      {errors !== '' ? <p className="error">{ errors }</p> : null}
       </div>
     )
-    return isAuthorized ? <Redirect to="/private" /> : authForm;
+    return isAuthorized ? <Redirect to="/" /> : authForm;
   }
 }
 

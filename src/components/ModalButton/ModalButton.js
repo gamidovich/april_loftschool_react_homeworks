@@ -4,7 +4,7 @@ import Modal from './Modal'
 
 class ModalButton extends Component {
 
-  static displayName = 'Modal button'
+  static displayName = 'ModalButton'
   state = {
     isModalShow: false
   }
@@ -15,10 +15,10 @@ class ModalButton extends Component {
     const {isModalShow} = this.state
     return (
       <Fragment>
-      <button onClick={this.showModal}>кнопка</button>
+      <button onClick={this.showModal}>Show modal!</button>
       <Modal show={isModalShow}>
         <h1>Модалочка</h1>
-        <button onClick={this.hideModal}>закрыть</button>
+        <button onClick={this.hideModal}>Close</button>
       </Modal>
       </Fragment>
     );

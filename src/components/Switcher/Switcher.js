@@ -29,6 +29,7 @@ class Switcher extends Component {
             </li>)
           })}
         </ul>
+        <hr></hr>
         <div className='component-wrapper'>
           {children[selectedChild]}
         </div>

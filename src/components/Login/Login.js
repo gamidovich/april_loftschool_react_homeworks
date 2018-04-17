@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { AuthHOC } from 'components/AuthorizeProvider';
 import { Redirect } from 'react-router-dom';
 
-import Errors from './Errors';
-
 class Login extends Component {
   state = {
 	  email: '',
 	  password: '',
+	  errors: '',
   };
 
   handleChangeForm = (e) => {
@@ -17,12 +16,17 @@ class Login extends Component {
   handleClick = () => {
       const { email, password } = this.state;
       const { authorizeUser } = this.props;
-      authorizeUser(email, password);
+      if (authorizeUser(email, password)) {
+	      this.setState( ({ errors }) => ({ errors: ''}));
+      } else {
+	      this.setState( ({ errors }) => ({ errors: 'Проверьте введённые данные'}));
+      }
   };
 
   render() {
     const { isAuthorized } = this.props;
     const { email, password } = this.props;
+    const { errors } = this.state;
 
     const authForm = (
       <div className="form-group">
@@ -36,14 +40,11 @@ class Login extends Component {
                value={ password }
                onChange={ this.handleChangeForm }
         />
-        <Errors >
-          Проверьте логин и пароль.
-        </Errors>
-
         <button className="button-auth"
                 onClick={ this.handleClick }
         > Авторизироваться
         </button>
+	      {errors !== '' ? <p className="error">{ errors }</p> : null}
       </div>
     )
     return isAuthorized ? <Redirect to="/private" /> : authForm;

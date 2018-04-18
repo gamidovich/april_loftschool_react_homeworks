@@ -2,22 +2,35 @@ import React, { Component } from 'react';
 
 class CardNumberInput extends Component {
 
-  format = (input) => { input.replace(/(\d{0,4})/g, '$1 ') };
+  state = {
+    number: 0
+  }
 
-  normalize = (input) => { input.trim() };
+  componentWillReceiveProps(nextProps) {
+    this.setState({ number: this.format(nextProps.cardNumber) });
+  }
 
-  componentWillReceiveProps = (nextProps) => {
-    console.log(nextProps);
-    this.setState({ cardNumber: this.format(nextProps.cardNumber) });
+  componentWillMount() {
+    this.setState({ number: this.format(this.props.cardNumber) });
+  }
+
+  format(value) {
+    return (value ? String(value).replace(/(\d{4})/g, '$1 ').trim() : '');
+  }
+
+  normalize(value) {
+    return (typeof value === 'string') ? value.replace(/\s/g, '') : '';
+  }
+
+  onChange = (e) => {
+    const cardNumber = this.normalize(e.target.value);
+    this.props.onChange(cardNumber);
   }
 
   render() {
-    console.log(this.state);
+    const { number } = this.state;
     return (
-      <input type="text"
-        onChange={this.props.onChange}
-      // value={this.state.cardNumber}
-      />
+      <input type="text" value={number} onChange={this.onChange} />
     );
   }
 }

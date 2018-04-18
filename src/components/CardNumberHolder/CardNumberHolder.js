@@ -9,9 +9,8 @@ class CardNumberHolder extends Component {
 
   static displayName = 'CardNumberHolder';
 
-  handleChange = (event) => { // запсиатьв пропсы инпута введенные значения
-    const ev = event.target.value;
-    this.setState(creditCardInput => ({ cardNumber: ev }));
+  handleChange = (number) => { // запсиать в пропсы инпута введенные значения
+    this.setState({ cardNumber: number });
   }
 
   render() {

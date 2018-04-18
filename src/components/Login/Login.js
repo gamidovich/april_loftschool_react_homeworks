@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { AuthHOC } from 'components/AuthorizeProvider';
 
-import { Redirect } from 'react-router-dom';
-import PrivateRoute from '../PrivateRoute/PrivateRoute';
+// import { Redirect } from 'react-router-dom';
+import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 class Login extends Component {
 
   state = {
@@ -17,6 +17,7 @@ class Login extends Component {
   handelClick = () => {
     const { email, password } = this.state;
     this.props.authorizeUser(email, password);
+    this.props.history.push('/');
   }
 
   render() {
@@ -39,4 +40,6 @@ class Login extends Component {
     }
   }
 
-  export default AuthHOC(Login);
+}
+
+export default AuthHOC(Login);

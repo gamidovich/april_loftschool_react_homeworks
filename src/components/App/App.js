@@ -4,8 +4,8 @@ import { AuthorizeProvider } from 'components/AuthorizeProvider';
 
 import Login from "components/Login";
 import Public from "components/Public";
-import PrivateRoute from "components/PrivateRoute"
-
+import PrivateRoute from "components/PrivateRoute";
+// import Private from "../Private";
 export class App extends PureComponent {
   render() {
     return (
@@ -20,7 +20,7 @@ export class App extends PureComponent {
           </nav>
           <Switch>
             <Route path="/login" component={Login} />
-            <PrivateRoute path="/private" component={PrivateRoute} />
+            <Route to="/private" component={PrivateRoute} />
             <Route path="/" exact component={Public} />
           </Switch>
         </div>

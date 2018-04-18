@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { AuthHOC } from 'components/AuthorizeProvider';
 
 import { Redirect } from 'react-router-dom';
-import PrivateRoute from '../PrivateRoute/PrivateRoute';
 class Login extends Component {
 
   state = {
     email: '',
-    password: 0
+    password: 0,
+    isAuthFailed: false
   }
 
   handleChange = e => {
@@ -19,18 +19,26 @@ class Login extends Component {
     this.props.authorizeUser(email, password);
   }
 
+  componentWillUpdate = (nextProps, nextState) => {
+    console.log(nextProps);
+    console.log(nextState);
+    if (nextProps.isAuthorized) this.setState({ isAuthFailed: true });
+  }
+
   render() {
-    console.log(this.state);
-    console.log(this.props);
+    // console.log(this.state);
+    // console.log(this.props);
     const { isAuthorized } = this.props;
+    const { isAuthFailed } = this.state;
     if (isAuthorized) {
-      return <PrivateRoute />
+      return <Redirect to="/" />
     } else {
       return (
         <div>
           <div>
             <input name='email' onChange={this.handleChange} />
             <input name='password' onChange={this.handleChange} />
+            {isAuthFailed ? <p className="error">Неверное имя или пароль</p> : null}
           </div>
           <button onClick={this.handelClick}>Submit</button>
         </div>
@@ -38,5 +46,6 @@ class Login extends Component {
       // }
     }
   }
+}
 
-  export default AuthHOC(Login);
+export default AuthHOC(Login);

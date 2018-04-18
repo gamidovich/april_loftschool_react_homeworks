@@ -3,10 +3,6 @@ import './CardForm.css';
 
 class CardForm extends Component {
 
-  constructor() {
-    super();
-  };
-
   handleChangeForm = (evt) => {
     return this.props.onChangeForm(evt.target.name, evt.target.value);
   };
@@ -16,10 +12,13 @@ class CardForm extends Component {
   render() {
     return (
       <div className="card-form">
-        <input type="text" name="cardNumber" onChange={this.handleChangeForm} change={this.onChangeForm} />
+        <input type="text" name="cardNumber" onChange={this.handleChangeForm} />
       </div>
     );
   };
 }
 
 export default CardForm;
+
+
+// change={this.onChangeForm}

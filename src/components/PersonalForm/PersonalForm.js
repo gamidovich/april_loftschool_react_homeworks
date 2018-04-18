@@ -10,12 +10,14 @@ class PersonalForm extends Component {
   render() {
     return (
       <div className="personal-form">
-        <input type="text" name="firstName" onChange={this.handleChangeForm} change={this.onChangeForm} />
-        <input type="text" name="lastName" onChange={this.handleChangeForm} change={this.onChangeForm} />
-        <input type="text" name="email" onChange={this.handleChangeForm} change={this.onChangeForm} />
+        <input type="text" name="firstName" onChange={this.handleChangeForm} />
+        <input type="text" name="lastName" onChange={this.handleChangeForm} />
+        <input type="text" name="email" onChange={this.handleChangeForm} />
       </div>
     );
   }
 }
 
 export default PersonalForm;
+
+// change={this.onChangeForm}

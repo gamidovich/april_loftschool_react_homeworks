@@ -16,6 +16,9 @@ class Search extends Component {
 		this.setState({
 			value: e.target.value
 		})
+
+		
+
 	}
 
 

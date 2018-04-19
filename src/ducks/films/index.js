@@ -4,16 +4,13 @@ import { combineReducers } from 'redux';
 
 
 const {
-	films: { 
-		getDataRequest: getFilmsRequest,
+    searchRequest: getFilmsRequest,
     getDataSuccess: getFilmsSuccess,
     getDataFailure: getFilmsFailure,
-}} = createActions({
-	FILMS:{
-		GET_DATA_REQUEST: null,
-    GET_DATA_SUCCESS: null,
-    GET_DATA_FAILURE: null
-	}	
+} = createActions({
+  SEARCH_REQUEST: null,
+  GET_DATA_SUCCESS: null,
+  GET_DATA_FAILURE: null
 })
 
 

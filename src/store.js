@@ -4,16 +4,13 @@ import showMiddleware from './middlewares/showMiddleware';
 import searchMiddleware from './middlewares/searchMiddleware';
 
 
-import ducks from './ducks/films'
-
 
 export default initialState =>
   createStore(
     rootReducer,
     initialState,
     compose(
-      applyMiddleware(searchMiddleware),
-      //applyMiddleware(searchMiddleware, showMiddleware),
+      applyMiddleware(searchMiddleware, showMiddleware),
       window.devToolsExtension ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
     ),
   );

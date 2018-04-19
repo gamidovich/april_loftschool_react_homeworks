@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import Market from '../Market';
 import Farm from '../Farm';
@@ -6,8 +7,17 @@ import Budget from '../Budget';
 
 export class App extends Component {
   render() {
-    return <div className="app" />;
+    const { budget } = this.props;
+    return (
+      <div className="app">
+        <Market />
+        <Farm />
+        <Budget {...budget} />
+      </div>
+    );
   }
 }
-
-export default App;
+const mapStateToProps = state => ({
+  ...state,
+});
+export default connect(mapStateToProps)(App);

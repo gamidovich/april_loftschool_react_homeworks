@@ -13,7 +13,6 @@ export class Farm extends Component {
   };
 
   render() {
-    console.log('props', this.props);
     const { ordersFarm } = this.props;
     return (
       <div className="farm">

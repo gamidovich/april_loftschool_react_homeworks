@@ -75,6 +75,8 @@ const mapDispathToProps = {
   moveOrderToFarm,
 };
 
-const mapStateToProps = ({ market }) => ({ ...market });
+const mapStateToProps = ({ market }) => ({
+  orders: market.orders
+});
 
 export default connect(mapStateToProps, mapDispathToProps)(Market);

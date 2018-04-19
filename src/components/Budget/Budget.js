@@ -1,14 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { assignWith } from 'lodash';
+import PropTypes from 'prop-types';
 import './Budget.css';
-
-const budgetMapElements = {
-  profit: 'Всего получено денег:',
-  customerExpance: 'Расходы продавцов',
-  farmExpanse: 'Расходы на ферме:',
-  deliveryExpanse: 'Расходы на доставку:',
-};
 
 export const Budget = ({
   profit = 0,
@@ -27,16 +21,37 @@ export const Budget = ({
   return (
     <div className="budget">
       <h2>Бюджет</h2>
-      {keys.map(key => (
-        <p key={key}>
-          {budgetMapElements[key]} {props[key]}
-        </p>
-      ))}
-      <p>Итого: {keys.reduce((memo, key) => memo + props[key], 0)}</p>
+      <p>
+        Всего получено денег: <span className="t-profit">{profit}</span>
+      </p>
+      <p>
+        Расходы продавцов: <span className="t-sellers">{expanses.customerExpance}</span>
+      </p>
+      <p>
+        Расходы на ферме: <span className="t-farm">{expanses.farmExpanse}</span>
+      </p>
+      <p>
+        Расходы на доставку: <span className="t-delivery">{expanses.deliveryExpanse}</span>
+      </p>
+      <p>
+        Итого: <span className="t-total">{keys.reduce((memo, key) => memo + props[key], 0)}</span>
+      </p>
     </div>
   );
 };
 
-const mapStateToProps = ({ budget }) => ({ ...budget });
+Budget.propTypes = {
+  profit: PropTypes.number.isRequired,
+  customerExpance: PropTypes.number.isRequired,
+  farmExpanse: PropTypes.number.isRequired,
+  deliveryExpanse: PropTypes.number.isRequired,
+};
+
+const mapStateToProps = ({ budget }) => ({
+  profit: budget.profit,
+  customerExpance: budget.customerExpance,
+  farmExpanse: budget.farmExpanse,
+  deliveryExpanse: budget.deliveryExpanse,
+});
 
 export default connect(mapStateToProps)(Budget);

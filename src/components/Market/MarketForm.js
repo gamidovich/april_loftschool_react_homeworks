@@ -4,7 +4,7 @@ import OrderList from '../Order/OrderList';
 export default ({ handleCreate = f => f, handleMove = f => f, orders = [] }) => (
   <div className="market">
     <h2>Новые заказы в магазине</h2>
-    <button className="new-orders__create-form" onClick={handleCreate}>
+    <button className="new-orders__create-button" onClick={handleCreate}>
       Создать заказ
     </button>
     <button disabled={orders.length === 0} onClick={handleMove}>

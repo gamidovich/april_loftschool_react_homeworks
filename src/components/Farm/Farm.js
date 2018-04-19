@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { moveOrderToCustomer } from 'actions/farmActions';
 import FarmForm from './FarmForm';
-import { moveLastOrder } from 'helpers'
+import { moveLastOrder } from 'helpers';
 import './Farm.css';
 
 export class Farm extends Component {
@@ -24,11 +24,13 @@ export class Farm extends Component {
   render() {
     const { orders } = this.props;
 
-    return <FarmForm orders={orders} handleMove={this.handleMoveOrder}/>
+    return <FarmForm orders={orders} handleMove={this.handleMoveOrder} />;
   }
 }
 
-const mapStateToProps = ({ farm }) => ({ ...farm });
+const mapStateToProps = ({ farm }) => ({
+  orders: farm.orders
+});
 
 const mapDispatchToProps = {
   moveOrderToCustomer,

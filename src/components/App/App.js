@@ -8,7 +8,7 @@ import ModalButton from '../ModalButton'
 class App extends Component {
   render() {
     return (
-      <Switcher /* children={[<VideoPlayer />, <CardNumberHolder />, <ModalButton />]} */>
+      <Switcher>
         <VideoPlayer /> 
         <CardNumberHolder />
         <ModalButton />

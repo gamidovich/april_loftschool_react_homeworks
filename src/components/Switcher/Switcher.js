@@ -16,25 +16,19 @@ class Switcher extends Component {
     const {children} = this.props
     const {selectedChild} = this.state
 
-    return (
-      <nav>
-        <ul className='component-list'>
+    return <nav>
+        <ul className="component-list">
           {React.Children.map(children, (child, id) => {
-            return (<li className='component-list__name'
-            key={id}
-            data-id={id}
-            onClick={this.handleChangeChild}
-            >
-            {child.type.displayName||child.type.name}
-            </li>)
+            return <li className="component-list__name" key={id} data-id={id} onClick={this.handleChangeChild}>
+                {child.type.displayName || child.type.name}
+              </li>;
           })}
         </ul>
-        <hr></hr>
-        <div className='component-wrapper'>
-          {children[selectedChild]}
+        <hr />
+        <div className="component-wrapper">
+          {React.Children.toArray(children)[selectedChild]}
         </div>
-      </nav>
-    );
+      </nav>;
   }
 }
 

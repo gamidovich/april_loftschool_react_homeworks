@@ -16,18 +16,13 @@ class Login extends Component {
 
   handelClick = () => {
     const { email, password } = this.state;
-    this.props.authorizeUser(email, password);
+    if (!this.props.authorizeUser(email, password)) {
+      this.setState({ isAuthFailed: true });
+    }
   }
 
-  componentWillUpdate = (nextProps, nextState) => {
-    console.log(nextProps);
-    console.log(nextState);
-    if (nextProps.isAuthorized) this.setState({ isAuthFailed: true });
-  }
 
   render() {
-    // console.log(this.state);
-    // console.log(this.props);
     const { isAuthorized } = this.props;
     const { isAuthFailed } = this.state;
     if (isAuthorized) {
@@ -43,7 +38,6 @@ class Login extends Component {
           <button onClick={this.handelClick}>Submit</button>
         </div>
       );
-      // }
     }
   }
 }

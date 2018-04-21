@@ -6,21 +6,21 @@ import './Farm.css';
 
 export class Farm extends Component {
   handleClickMove = () => {
-    const { ordersFarm, moveOrderToCustomer } = this.props;
-    const order = ordersFarm[ordersFarm.length - 1];
+    const { orders, moveOrderToCustomer } = this.props;
+    const order = orders[orders.length - 1];
 
     moveOrderToCustomer(order);
   };
 
   render() {
-    const { ordersFarm } = this.props;
+    const { orders } = this.props;
     return (
       <div className="farm">
         <h2>Производство на ферме</h2>
-        <button disabled={ordersFarm.length === 0} onClick={this.handleClickMove}>
+        <button disabled={orders.length === 0} onClick={this.handleClickMove}>
           Отправить урожай клиенту
         </button>
-        <div>{ordersFarm.map((order, idx) => <Order key={order.id} {...order} />)}</div>
+        <div>{orders.map((order, idx) => <Order key={order.id} {...order} />)}</div>
       </div>
     );
   }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import './App.css';
 import Market from '../Market';
 import Farm from '../Farm';
@@ -12,12 +11,10 @@ export class App extends Component {
       <div className="app">
         <Market />
         <Farm />
-        <Budget {...budget} />
+        <Budget />
       </div>
     );
   }
 }
-const mapStateToProps = state => ({
-  ...state,
-});
+
 export default connect(mapStateToProps)(App);

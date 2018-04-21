@@ -18,8 +18,8 @@ class App extends Component {
   handleChangeForm = (a, b) => {
     const stateKeys = Object.keys(this.state);
     stateKeys.map(keyName => {
-      if (keyName === a)
-        this.setState({ [keyName]: b });
+      if (keyName === a) { this.setState({ [keyName]: b }) };
+      return null;
     })
   }
 
@@ -39,11 +39,10 @@ class App extends Component {
   };
 
   isFormCommitable = () => {
-
     const { step, firstName, lastName, email, cardNumber } = this.state;
-    if (firstName !== '' && lastName !== '' && email !== '' && email.includes('@')) {
-      return true;
 
+    if (step === 1) {
+      if (firstName !== '' && lastName !== '' && email !== '' && email.includes('@')) return true;
       /**
        * Оставлю для анализа - как делать не надо
        */
@@ -60,35 +59,17 @@ class App extends Component {
       //   }
 
     } else if (step === 2) {
-      if (cardNumber.length === 16) {
-        return true;
-      }
-    }
-    /**
-     * Оставлю для анализа - как делать не надо
-     */
-    //   if (state.cardNumber.length !== 16) {
-    //     return true
-    //   } else if (state.cardNumber.length === 16) {
-    //     return false
-    else if (step !== 1 | 2) { return false }
+      if (cardNumber.length === 16) return true;
+
+    } else if (step !== 1 | 2) return false;
   }
 
   handleClickNextForm = () => {
     this.setState(({ step }) => ({ step: step + 1 }));
-    this.changeDisability();
-  }
-
-  changeDisability = () => {
-    console.log('changeDisability');
-    let isDisabled = !this.isFormCommitable(); // так как должно быть по умолчанию false, а ф-ция вернула true
-    return isDisabled;
   }
 
   render() {
-    // let isDisabled = !this.isFormCommitable(); // так как должно быть по умолчанию false, а ф-ция вернула true
-    // console.log(isDisabled);
-    //
+    let isDisabled = !this.isFormCommitable(); // так как должно быть по умолчанию false, а ф-ция вернула true
     const { step } = this.state;
     return (
       <div className="container">
@@ -107,7 +88,7 @@ class App extends Component {
           <button className="button-next"
             type="button"
             onClick={this.handleClickNextForm}
-            disabled={!this.changeDisability()}>Next
+            disabled={isDisabled}>Next
           </button>
         </div>
       </div>

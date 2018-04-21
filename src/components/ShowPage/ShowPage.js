@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { getSerialRequest } from 'actions/show';
 import ShowPageBody from './ShowPageBody'
@@ -15,7 +15,7 @@ class ShowPage extends PureComponent {
     const { isLoading, serial } = this.props;
 
     return (
-      <Fragment>{isLoading ? <p>Данные загружаются</p> : <ShowPageBody {...serial} />}</Fragment>
+      isLoading ? <p>Данные загружаются</p> : <ShowPageBody {...serial} />
     );
   }
 }

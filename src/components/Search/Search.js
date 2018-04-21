@@ -4,25 +4,29 @@ import { searchSerialsRequest } from 'actions/search';
 import ShowPreview from '../ShowPreview';
 
 class Search extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.serialName = React.createRef();
+  state = {
+    query: ''
   }
 
   handleClick = () => {
-    const { value } = this.serialName.current;
     const { searchSerialsRequest } = this.props;
+    const { query } = this.state
 
-    searchSerialsRequest(value);
+    searchSerialsRequest(query);
   };
 
+  handleChange = (ev) => {
+    const { value } = ev.target
+    this.setState(state => ({...state, query: value}))
+  }
+
   render() {
-    const { isLoading, serials, } = this.props;
+    const { isLoading, serials } = this.props;
+    const { query } = this.state;
 
     return (
       <div>
-        <input placeholder="название сериала" ref={this.serialName} />
+        <input placeholder="название сериала" value={query} onChange={this.handleChange}/>
         <button onClick={this.handleClick}>Найти</button>
         <div className="t-search-result">
           {isLoading ? (

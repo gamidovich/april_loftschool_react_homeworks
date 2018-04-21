@@ -4,7 +4,7 @@ import { searchSerialsRequest, searchSerialsSuccess, searchSerialsFailure } from
 
 const serials = handleActions(
   {
-    [searchSerialsSuccess]: (state, action) => ([...state, ...action.payload]),
+    [searchSerialsSuccess]: (_, action) => action.payload,
   },
   [],
 );

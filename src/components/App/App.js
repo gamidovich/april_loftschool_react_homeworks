@@ -6,7 +6,6 @@ import Budget from '../Budget';
 
 export class App extends Component {
   render() {
-    const { budget } = this.props;
     return (
       <div className="app">
         <Market />

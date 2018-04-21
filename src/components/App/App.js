@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import Market from '../Market';
 import Farm from '../Farm';
@@ -16,5 +17,7 @@ export class App extends Component {
     );
   }
 }
-
-export default App;
+const mapStateToProps = state => ({
+  ...state,
+});
+export default connect(mapStateToProps)(App);

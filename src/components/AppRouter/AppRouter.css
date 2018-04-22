@@ -27,3 +27,22 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* .t-preview-list, */
+.t-search-result,
+.t-person-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.t-person,
+.t-preview {
+  margin: 0 4px;
+  max-width: 300px;
+}
+
+.t-link {
+  display: block; /* test not pass without this :) */
+}

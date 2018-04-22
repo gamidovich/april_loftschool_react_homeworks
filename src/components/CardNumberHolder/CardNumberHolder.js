@@ -6,6 +6,8 @@ class CardNumberHolder extends Component {
     cardNumber: '',
   };
 
+  static displayName = 'Card number formating';
+
   handleChange = cardNumber => this.setState(() => ({ cardNumber }));
 
   render() {

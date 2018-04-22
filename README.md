@@ -13,3 +13,5 @@
 
 Для установления имени у компоненты используйте `static displayName = 'Name'`.
 Для работы с детьми нужно использовать методы `React.Children.map` и `React.Children.toArray`.
+
+yarn cypress:open

@@ -46,6 +46,7 @@ class Switcher extends Component {
     return (
       <div className="switcher">
         {this.renderNav()}
+        <hr />
         <div className="component-wrapper">{React.Children.toArray(children)[selectedChild]}</div>
       </div>
     );

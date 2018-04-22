@@ -24,7 +24,7 @@ class VideoPlayer extends PureComponent {
         </video>
         <div className="video-player__buttons">
           <button onClick={this.handlePlay}>Play</button>
-          <button onClick={this.handlePause}>Pause</button>
+          <button onClick={this.handlePause}>Stop</button>
         </div>
       </div>
     );

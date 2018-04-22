@@ -2,9 +2,8 @@ import { show } from '../api'
 import { getFilmRequest, getFilmSuccess, getError  } from '../ducks/films'
 
 const searchMiddleware = store => next => action => {
-  if(action.type === getFilmRequest().type){
+  if(action.type === getFilmRequest.toString()){
 
-    
     
     show(action.payload)
       .then(item => store.dispatch(getFilmSuccess(item)))

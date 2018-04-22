@@ -1,36 +1,21 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { getFilmRequest, getFilm } from '../../ducks/films';
+import { getFilmRequest, getFilm, getIsLoading } from '../../ducks/films';
+import ShowPerson from '../ShowPerson'
 
-class ShowPage extends Component {
-  componentDidMount() {
-    const {
-      getFilmRequest,
-      match: {
-        params: { id },
-      },
-    } = this.props;
+class ShowPage extends PureComponent {
+
+  
+  componentWillMount() {
+    const { getFilmRequest } = this.props;
+    const { id } = this.props.match.params;
 		getFilmRequest(id);
-		
-	}
-	
-
-	renderPerson = () => {
-		//const persons = this.props._embedded.cast
-
-		return 12;
-		// return persons.map(({ persons:{name, image} }) => 
-		// 	<div className="t-person">
-		// 		<p>{name}</p>
-		// 		{image && <img src={image.medium} alt={name} />}
-		// 	</div>)
 	}
 
-  renderFilm = () => {
-		const { renderPerson } = this
-		const { film:{ name, image, summary } } = this.props;
-
+  render () {
+    const { film, film:{ name, image, summary }, isLoading } = this.props;
     return (
+      !isLoading &&
       <div>
         <p>{name}</p>
 				{image && 
@@ -41,28 +26,21 @@ class ShowPage extends Component {
 				}
         
         <div dangerouslySetInnerHTML={{__html: summary}}></div>
-        <div className="sc-ifAKCX dHcTOt">
-					{renderPerson()}
+        <div>
+          {film.id && <ShowPerson persons={film._embedded.cast} />}
         </div>
       </div>
     );
   };
-
-  render() {
-    const { renderFilm } = this;
-		console.log('multirender')
-    return renderFilm();
-  }
 }
 
-function putStateToProps(state) {
-  return {
-    film: getFilm(state),
-  };
-}
+const mapStateToProps = (state) => ({
+  film: getFilm(state),
+  isLoading: getIsLoading(state),
+})
 
 const mapDispatchToProps = {
-  getFilmRequest,
-};
+  getFilmRequest
+}
 
-export default connect(putStateToProps, mapDispatchToProps)(ShowPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowPage);

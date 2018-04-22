@@ -50,17 +50,16 @@ const error = handleActions(
 
 const entities = handleActions(
   {
-    [getFilmRequest]: (state, action) => action.payload,
     [getFilmSuccess]: (state, action) => action.payload,
   },
-  []
+  {}
 )
 
 
 const getIsLoading = state => state.films.isLoading;
 const getError = state => state.films.error;
 const getFilms = state => state.films.elements;
-const getFilm = state => state.films.entities
+const getFilm = state => state.films.entities;
 
 export default combineReducers({
   elements,

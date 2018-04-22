@@ -1,42 +1,25 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getFilms, getFilmsSuccess } from '../../ducks/films';
 import { Link } from 'react-router-dom'
 
 class ShowPreview extends Component {
 
+  render() {
 
-  renderFilms = () => {
-    const { films } = this.props;
-    return films.map(({ id, name, image, summary }) => (
-      <div key={id}>
+    const { id = 0, name = '', image = {}, summary = '' } = this.props
+    return(
+      <div className='t-preview'>
         <div>
           <Link className="t-link" to={`/shows/${id}`}>
-            <h3>{name}</h3>
+            {name}
           </Link>
-          {image && <img src={image.medium} alt={name} />}
+          {image && <img src={image.medium} alt={name}/>}
         </div>
         <div>
-          <p />
+          <p dangerouslySetInnerHTML={{__html: summary}} />
         </div>
       </div>
-    ));
-  };
-
-  render() {
-    const { renderFilms } = this;
-    return renderFilms();
+    )
   }
 }
 
-function putStateToProps(state) {
-  return {
-    films: getFilms(state),
-  };
-}
-
-const mapDispatchToProps = {
-  getFilmsSuccess,
-};
-
-export default connect(putStateToProps, mapDispatchToProps)(ShowPreview);
+export default ShowPreview

@@ -19,7 +19,8 @@ class CardNumberInput extends Component {
     this.setState(() => ({ number }));
   }
 
-  format = value => (value === null ? '' : value.replace(/(\d{4})/g, '$1 ').trim());
+  // prettier-ignore
+  format = (value) => value ? value.toString().replace(/(\d{4})/g, '$1 ').trim() : '';
 
   normalize = number => number.split(' ').join('');
 

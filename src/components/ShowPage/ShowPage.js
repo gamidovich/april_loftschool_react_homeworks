@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { getShowRequest } from '../../actions/show';
+import Person from './Person';
 
 class ShowPage extends PureComponent {
 
@@ -27,12 +28,10 @@ class ShowPage extends PureComponent {
           <p>{name}</p>
           {image && <img src={image.medium} alt={name}/>}
           <div dangerouslySetInnerHTML={{__html: summary}} />
+
           <div className="t-person-list">
             {persons.map(({ person: item }) =>
-              <div key={item.id} className="t-person">
-                <p>{item.name}</p>
-                <img src={item.image.medium} alt={item.name}/>
-              </div>
+              <Person key={item.id} {...item}/>
             )}
           </div>
         </div>

@@ -1,10 +1,11 @@
 import { handleActions } from 'redux-actions';
 import { combineReducers } from 'redux';
+
 import { getShowRequest, getShowSuccess, getShowFailure } from '../actions/show';
 
 const entity = handleActions(
   {
-    [getShowSuccess]: (state, action) => action.payload // state.concat(action.payload)
+    [getShowSuccess]: (state, action) => action.payload
   },
   null
 );

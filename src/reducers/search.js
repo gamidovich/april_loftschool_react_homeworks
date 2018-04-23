@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { combineReducers } from 'redux';
+
 import { getSeriesRequest, getSeriesSuccess, getSeriesFailure } from '../actions/search';
 
 const series = handleActions(

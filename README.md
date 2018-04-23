@@ -1,3 +1,4 @@
+
 # 7 домашнее задание
 [Пример](http://5a78bddda6188f169349f1e8.confident-dubinsky-462dd0.netlify.com)
 
@@ -32,5 +33,6 @@
 ```
 <div dangerouslySetInnerHTML={{__html: summary}} />
 ```
+
 
 

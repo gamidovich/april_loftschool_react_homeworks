@@ -1,0 +1,4 @@
+[0412/115647.454:ERROR:exception_snapshot_win.cc(88)] thread ID 0 not found in process
+[0412/115647.573:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[0412/115647.618:ERROR:exception_snapshot_win.cc(88)] thread ID 0 not found in process
+[0412/115647.618:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed

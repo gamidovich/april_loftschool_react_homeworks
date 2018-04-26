@@ -14,19 +14,22 @@ class Login extends Component {
   handleClick = () => {
     const {email, password} =this.state
     const {authorizeUser} = this.props
-    
-    authorizeUser(email, password)
-    this.setState({ isAuth: authorizeUser(email, password)})
+    let auth = authorizeUser(email, password);
+    this.setState({ isAuth: auth})
   }
   render() {
     const {isAuth} = this.state
     const { isAuthorized } = this.props;
     
-    return isAuthorized ? <Redirect to="/" /> : (<div>
-      <input name='email' onChange={this.handleChange}></input>
-      <input name='password' onChange={this.handleChange}></input>
+     
+    if(isAuthorized) { 
+      return <Redirect to="/" />
+    } 
+    return (<div>
+      <input name='email' onChange={this.handleChange}/>
+      <input name='password' onChange={this.handleChange}/>
       <button onClick={this.handleClick}>Submit</button>
-        {!isAuth ? <p className='error'>неверный логин или пароль</p>:null}
+        {!isAuth && <p className='error'>неверный логин или пароль</p>}
       </div>);
   }
 }

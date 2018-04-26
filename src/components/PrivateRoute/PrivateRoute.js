@@ -5,10 +5,10 @@ import { Redirect } from 'react-router-dom';
 
 class PrivateRoute extends PureComponent {
   render() {
-    return <Redirect to="/login" />
+    return <Redirect to="/login" />;
     const { isAuthorized } = this.props;
-    if (isAuthorized) return <Private />
-    else return <p className="error">error</p>
+    if (isAuthorized) return <Private />;
+    else return <p className="error">error</p>;
   }
 }
 
